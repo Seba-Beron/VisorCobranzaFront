@@ -1,0 +1,11 @@
+.cartel {
+  width: 300px;
+  min-height: 400px;
+  background: #de1e26;
+  padding: 27px 27px 27px 27px;
+  margin-top: 5%;
+}
+
+.logo{
+  width: 100%;
+}
