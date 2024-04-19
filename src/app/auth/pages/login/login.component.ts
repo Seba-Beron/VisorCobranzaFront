@@ -15,7 +15,6 @@ import { JwtModule } from "@auth0/angular-jwt";
 })
 export class LoginComponent{
   colors = colors;
-  responseData: any;
 
   public myForm: FormGroup = this.fb.group({
     rut: ['', [ Validators.required ]],
@@ -29,30 +28,24 @@ export class LoginComponent{
   ) {}
 
   getToken() {
-    // Realiza la solicitud GET
-    this.http.get(secrets.api + "usuarios/login").subscribe((data) => {
-      this.responseData = data;
-      console.log('Respuesta de la solicitud GET:', this.responseData);
-    });
+    if(this.myForm.valid){
+      console.log(this.myForm.value);
+      this.http.post(secrets.api + "usuarios/login", this.myForm.value).subscribe((response: any) => {
+        if(response.token){
+          localStorage.setItem('token', JSON.stringify(response.token));
+        }
+        else{
+          console.log(response.message);
+        }
+      });
+    }
+    else{
+      console.log('Datos invalidos');
+    }
   }
 
   isValidField( field: string ) {
     return this.validatorsService.isValidField( this.myForm, field );
-  }
-
-  onSubmit() {
-    this.myForm.markAllAsTouched();
-
-    try{
-      this.http.get(secrets.api).subscribe((data) => {
-        this.responseData = data;
-        console.log('Respuesta de la solicitud GET:', this.responseData);
-        localStorage.setItem('access_token', JSON.stringify(this.responseData.access_token));
-      });
-    }
-    catch (e){
-      console.log(e)
-    }
   }
 
   // devuelve el error que tiene el campo field
