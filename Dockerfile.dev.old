@@ -1,0 +1,9 @@
+FROM node:18
+
+RUN mkdir -p /home/app/front
+
+WORKDIR /home/app/front
+
+EXPOSE 4580
+
+CMD ["npm", "start"]

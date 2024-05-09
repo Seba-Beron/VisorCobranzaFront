@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { CanActivateFn, CanMatchFn } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { inject } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
-export class AuthGuard{
-  constructor() { }
-
-  // revisar  implements CanMatchFn, CanActivateFn  las otras estan deprecated
-}
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  return authService.getAuthToken();
+};

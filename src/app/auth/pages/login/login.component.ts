@@ -6,8 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import colors from '../../../../colors.config.json';
 import secrets from '../../../../secrets.config.json';
 
-import { JwtModule } from "@auth0/angular-jwt";
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
