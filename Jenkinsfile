@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                bat 'npm testCI'
+                bat 'npm run testCI'
             }
         }
         stage('Deploy') {
