@@ -14,7 +14,7 @@ import secrets from '../../../../secrets.config.json';
 export class LoginComponent{
   colors = colors;
 
-  public myForm: FormGroup = this.fb.group({
+  public formLogin: FormGroup = this.fb.group({
     rut: ['', [ Validators.required ]],
     password: ['', [ Validators.required, Validators.minLength(6) ]],
   });
@@ -26,9 +26,9 @@ export class LoginComponent{
   ) {}
 
   getToken() {
-    if(this.myForm.valid){
-      console.log(this.myForm.value);
-      this.http.post(secrets.api + "usuarios/login", this.myForm.value).subscribe((response: any) => {
+    if(this.formLogin.valid){
+      console.log(this.formLogin.value);
+      this.http.post(secrets.api + "usuarios/login", this.formLogin.value).subscribe((response: any) => {
         if(response.token){
           localStorage.setItem('token', JSON.stringify(response.token));
         }
@@ -43,15 +43,15 @@ export class LoginComponent{
   }
 
   isValidField( field: string ) {
-    return this.validatorsService.isValidField( this.myForm, field );
+    return this.validatorsService.isValidField( this.formLogin, field );
   }
 
   // devuelve el error que tiene el campo field
   getFieldError(field: string): string | null {
 
-    if (!this.myForm.controls[field]) return null;
+    if (!this.formLogin.controls[field]) return null;
 
-    const errors = this.myForm.controls[field].errors || {};
+    const errors = this.formLogin.controls[field].errors || {};
 
     for (const key of Object.keys(errors)) {
       switch (key) {

@@ -1,7 +1,7 @@
 <div class="cartel container" style="color: white;" [style.backgroundColor]="colors.primaryColor">
   <img class="logo" src="../assets/icons/Logo_SCFNegativo.JPG" alt="Logo Santander">
   <div class="text-center">
-    <form [formGroup]="myForm" (ngSubmit)="getToken()" autocomplete="off">
+    <form [formGroup]="formLogin" (ngSubmit)="getToken()" autocomplete="off">
       <div class="mb-3">
         <label for="rut" class="form-label">RUT</label>
         <input type="number" class="form-control" id="rut" formControlName="rut" placeholder="rut usuario din digito">
