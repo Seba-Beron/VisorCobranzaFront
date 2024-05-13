@@ -7,13 +7,13 @@ pipeline {
                 echo 'Building..'
                 bat 'npm install'
                 bat 'node --version'
-                bat 'ng build'
+                bat 'npm run build'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                bat 'ng test --no-watch --no-progress --browsers=ChromeHeadless'
+                bat 'npm testCI'
             }
         }
         stage('Deploy') {
