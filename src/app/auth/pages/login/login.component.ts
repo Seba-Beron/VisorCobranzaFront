@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidatorsService } from '../../../shared/services/validators.service';
-import { HttpClient } from '@angular/common/http';
+
 
 import colors from '../../../../colors.config.json';
-import secrets from '../../../../secrets.config.json';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,24 +23,13 @@ export class LoginComponent{
   constructor(
     private fb: FormBuilder,
     private validatorsService: ValidatorsService,
-    private http: HttpClient
+    private authService: AuthService
   ) {}
 
-  getToken() {
-    if(this.formLogin.valid){
-      console.log(this.formLogin.value);
-      this.http.post(secrets.api + "usuarios/login", this.formLogin.value).subscribe((response: any) => {
-        if(response.token){
-          localStorage.setItem('token', JSON.stringify(response.token));
-        }
-        else{
-          console.log(response.message);
-        }
-      });
-    }
-    else{
-      console.log('Datos invalidos');
-    }
+  getToken(){
+    console.log(this.formLogin.value) // todo
+    this.authService.getToken(this.formLogin.get('rut')?.value, this.formLogin.get('password')?.value)
+      .subscribe( res => console.log(res));
   }
 
   isValidField( field: string ) {

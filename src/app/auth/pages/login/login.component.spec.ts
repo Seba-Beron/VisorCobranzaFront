@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { LoginComponent } from './login.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -12,7 +13,8 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [LoginComponent]
+      declarations: [LoginComponent],
+      providers: [AuthService]
     });
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
