@@ -1,9 +1,10 @@
 .cartel {
   width: 300px;
   min-height: 400px;
-  background: #de1e26;
+  background-color: var(--rojo);
   padding: 27px 27px 27px 27px;
   margin-top: 5%;
+  color: var(--blanco);
 }
 
 .logo{

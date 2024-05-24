@@ -20,7 +20,7 @@ describe('AuthService', () => {
   it('should refuse login', (done) => {
     service.getToken('0', 'p')
       .subscribe( login => {
-        expect(login).toBe('Datos incompletos')
+        expect(login).toBe(false)
         done()
       })
   })

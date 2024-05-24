@@ -1,7 +1,7 @@
-<div class="cartel container" style="color: white;" [style.backgroundColor]="colors.primaryColor">
-  <img class="logo" src="../assets/icons/Logo_SCFNegativo.JPG" alt="Logo Santander">
+<div class="cartel container">
+  <img class="logo" src="../assets/images/SantanderLogin.png" alt="Logo Santander">
   <div class="text-center">
-    <form [formGroup]="formLogin" (ngSubmit)="getToken()" autocomplete="off">
+    <form [formGroup]="formLogin" (ngSubmit)="login()" autocomplete="off">
       <div class="mb-3">
         <label for="rut" class="form-label">RUT</label>
         <input type="number" class="form-control" id="rut" formControlName="rut" placeholder="rut usuario din digito">
@@ -12,6 +12,9 @@
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="password" formControlName="password" placeholder="contraseña">
+        <span *ngIf="isValidField('password')" class="form-text">
+          {{ getFieldError('password') }}
+        </span>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="checkbox">

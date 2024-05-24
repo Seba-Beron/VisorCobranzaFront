@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidatorsService } from '../../../shared/services/validators.service';
 
 
-import colors from '../../../../colors.config.json';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -12,31 +11,32 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-  colors = colors;
+export class LoginComponent {
 
   public formLogin: FormGroup = this.fb.group({
-    rut: ['', [ Validators.required ]],
-    password: ['', [ Validators.required, Validators.minLength(6) ]],
+    rut: ['23456789', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
+    password: ['asdf1234', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
   });
 
   constructor(
     private fb: FormBuilder,
     private validatorsService: ValidatorsService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private router:Router
+  ) { }
 
-  getToken(){
-    console.log(this.formLogin.value) // todo
+  login() {
     this.authService.getToken(this.formLogin.get('rut')?.value, this.formLogin.get('password')?.value)
-      .subscribe( res => console.log(res));
+      .subscribe(res => {
+        if (!res) this.formLogin.markAllAsTouched()
+        this.router.navigate(['lobby']);
+      });
   }
 
-  isValidField( field: string ) {
-    return this.validatorsService.isValidField( this.formLogin, field );
+  isValidField(field: string) {
+    return this.validatorsService.isValidField(this.formLogin, field)
   }
 
-  // devuelve el error que tiene el campo field
   getFieldError(field: string): string | null {
 
     if (!this.formLogin.controls[field]) return null;
@@ -50,6 +50,9 @@ export class LoginComponent{
 
         case 'minlength':
           return `Mínimo ${errors['minlength'].requiredLength} caracteres.`;
+
+        case 'maxlength':
+          return `Maximo ${errors['maxlength'].requiredLength} caracteres.`;
       }
     }
 

@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  /* paleta oficial */
+  --rojo: #EC0000;
+  --blanco: #FFFFFF;
+  --cielo: #DEEDF2;
+  --negro: #000000;
+
+  /* paleta generada */
+  --color1: #ec0404;
+  --color2: #f48484;
+  --color3: #820202;
+  --color4: #960202;
+  --color5: #8c0c0c;
+}
+
+
+.ng-valid:not(form).ng-touched {
+  border-left: 5px solid green;
+}
+
+.ng-invalid:not(form).ng-touched {
+  border-left: 5px solid red;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
